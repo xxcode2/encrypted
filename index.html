@@ -2,18 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Encrypted Avatar Generator</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
   <script src="script.js" type="module"></script>
 </head>
 <body>
-  <h1>🔐 Encrypted Avatar Generator</h1>
-  <p>Masukkan Discord username + discriminator (contoh: xxcode#1234):</p>
+  <div id="page-wrapper">
+    <!-- Navbar -->
+    <nav class="navbar">
+  <div class="navbar-inner">
+    <div class="menu">
+      <a href="#home" class="active">Home</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+      <button id="mode-toggle">🌙</button>
+    </div>
 
-  <input type="text" id="discordInput" placeholder="DiscordUsername#1234">
-  <button onclick="generateAvatar()">Generate Avatar</button>
+    <div class="hamburger">☰</div>
+  </div>
+</nav>
 
-  <div id="avatarContainer"></div>
-  <div id="codeOutput"></div>
+    <!-- Background Text & Particles -->
+    <div id="background-text">&lt;ENCRYPTED&gt;</div>
+    <div id="particles-js"></div>
+
+    <!-- Main Content -->
+    <main>
+      <section id="home">
+        <h1>🔐 Encrypted Avatar Generator</h1>
+        <p>Masukkan Discord username + discriminator (contoh: xxcode#1234):</p>
+        <input type="text" id="discordInput" placeholder="DiscordUsername#1234">
+        <div id="error-message" class="error"></div>
+        <button onclick="generateAvatar()">Generate Avatar</button>
+        <div id="avatarContainer"></div>
+        <div class="footer-spacer"></div>
+      </section>
+
+    
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2025 Encrypted Avatar Generator. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://twitter.com">X</a>
+          <a href="https://discord.com">Discord</a>
+          <a href="https://github.com">GitHub</a>
+        </div>
+      </div>
+      <button id="back-to-top">↑ Back to Top</button>
+    </footer>
+  </div>
 </body>
 </html>

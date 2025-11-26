@@ -1,41 +1,213 @@
 :root {
-  --bg-dark: #121212;          /* Latar belakang utama */
-  --card-dark: #1e1e1e;        /* Warna kontainer/avatar */
-  --accent-purple: #a259ff;    /* Ungu terang khas Arcium */
+  --bg-dark: #121212;
+  --card-dark: #1e1e1e;
+  --accent-purple: #a259ff;
   --accent-purple-hover: #8e44ff;
-  --text-light: #f0f0f0;       /* Teks utama */
-  --text-muted: #aaaaaa;       /* Teks sekunder */
+  --purple-neon: #b470ff;
+  --purple-glow: rgba(181, 113, 255, 0.7);
+  --text-light: #f0f0f0;
+  --text-muted: #aaaaaa;
+  --bg-light: #f0f0f0;
+  --card-light: #ffffff;
+  --text-dark: #121212;
+  --glow-shadow: 0 0 15px rgba(162, 89, 255, 0.5);
 }
 
+/* GLOBAL */
 body {
   font-family: 'Segoe UI', sans-serif;
   background-color: var(--bg-dark);
   color: var(--text-light);
   text-align: center;
-  padding: 40px 20px;
+  padding: 20px;
   margin: 0;
+  position: relative;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-bottom: 80px;
 }
 
-h1 {
-  font-size: 2em;
+body.light-mode {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  --card-dark: var(--card-light);
+  --text-light: var(--text-dark);
+  --text-muted: #666;
+  --glow-shadow: 0 0 15px rgba(162, 89, 255, 0.3);
+}
+
+/* BACKGROUND TEXT */
+#background-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10em;
   color: var(--accent-purple);
-  margin-bottom: 10px;
+  opacity: 0.08;
+  pointer-events: none;
+  font-weight: bold;
+  text-shadow: var(--glow-shadow);
+  z-index: -1;
+  white-space: nowrap;
 }
 
-p {
-  color: var(--text-muted);
-  margin-bottom: 20px;
+/* PARTICLES */
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
+/* ===========================================================
+     CYBERPUNK PURPLE NAVBAR (STYLE ARCIUM)
+=========================================================== */
+.navbar {
+  width: 100%;
+  padding: 14px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+
+  background: rgba(25, 0, 40, 0.4);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--purple-neon);
+
+  box-shadow: 0 0 15px var(--purple-glow),
+              inset 0 0 12px rgba(150, 0, 255, 0.2);
+
+  position: relative;
+  z-index: 10;
+
+  /* Cyberpunk glowing frame */
+  clip-path: polygon(
+    0% 0%, 97% 0%, 100% 20%, 100% 100%, 3% 100%, 0% 80%
+  );
+}
+
+/* Purple holo tech line at bottom */
+.navbar::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent,
+    #b05aff,
+    #d98cff,
+    #b05aff,
+    transparent
+  );
+  box-shadow: 0 0 12px var(--purple-glow);
+}
+
+/* MENU */
+.menu {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.menu a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: 0.3s;
+}
+
+/* Neon underline */
+.menu a::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  border-radius: 8px;
+  background: var(--purple-neon);
+  box-shadow: 0 0 10px var(--purple-glow);
+  transition: width 0.3s;
+}
+
+.menu a:hover::after,
+.menu a.active::after {
+  width: 100%;
+}
+
+.menu a:hover {
+  color: var(--purple-neon);
+  text-shadow: 0 0 10px var(--purple-glow);
+}
+
+/* MODE BUTTON */
+#mode-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.6em;
+  cursor: pointer;
+  color: var(--purple-neon);
+  transition: 0.3s;
+}
+
+#mode-toggle:hover {
+  color: var(--accent-purple-hover);
+  transform: scale(1.15) rotate(12deg);
+  text-shadow: 0 0 12px var(--purple-glow);
+}
+
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  font-size: 2.2em;
+  cursor: pointer;
+  color: var(--text-light);
+  transition: 0.3s;
+  position: absolute;
+  right: 20px;
+}
+
+.hamburger:hover {
+  color: var(--purple-neon);
+  text-shadow: 0 0 10px var(--purple-glow);
+}
+
+/* MAIN */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* INPUT & BUTTON */
 input {
   padding: 12px;
-  width: 90%;
-  max-width: 320px;
+  width: 100%;
+  max-width: 400px;
   font-size: 16px;
   border: 1px solid var(--accent-purple);
   border-radius: 6px;
   background-color: var(--card-dark);
   color: var(--text-light);
+  box-shadow: var(--glow-shadow);
+  margin-bottom: 10px;
 }
 
 button {
@@ -46,25 +218,44 @@ button {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  margin: 10px 5px;
-  transition: background-color 0.3s ease;
+  transition: 0.3s;
+  box-shadow: var(--glow-shadow);
 }
 
 button:hover {
   background-color: var(--accent-purple-hover);
+  box-shadow: 0 0 25px var(--accent-purple-hover);
 }
 
-#avatarContainer {
-  margin-top: 30px;
+/* ERROR */
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.error.show {
+  opacity: 1;
+}
+
+/* AVATAR CARD */
+#avatarContainer, .gallery-grid {
   display: grid;
   place-items: center;
+  gap: 20px;
 }
 
-/* Flip Card Reveal */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
 .card {
   perspective: 1000px;
-  width: 240px;
-  margin: 20px auto;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px 0;
 }
 
 .card-inner {
@@ -87,6 +278,7 @@ button:hover {
   background-color: var(--card-dark);
   padding: 20px;
   text-align: center;
+  box-shadow: var(--glow-shadow);
 }
 
 .card-front {
@@ -100,7 +292,6 @@ button:hover {
   transform: rotateY(180deg);
 }
 
-/* Glow effect saat card terbuka */
 .card-inner.is-flipped .card-back {
   box-shadow: 0 0 20px var(--accent-purple), 0 0 40px var(--accent-purple-hover);
   animation: glow 1.5s ease-out;
@@ -112,10 +303,135 @@ button:hover {
   100% { box-shadow: 0 0 15px var(--accent-purple); }
 }
 
-/* Responsive mobile */
-@media (max-width: 600px) {
-  input, button {
-    width: 100%;
-    max-width: none;
+/* LOADING */
+#loading-spinner {
+  display: none;
+  border: 4px solid var(--card-dark);
+  border-top: 4px solid var(--accent-purple);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ======================================================
+   FOOTER (FIXED → RELATIVE, SUPAYA TIDAK NUTUP KONTEN)
+====================================================== */
+footer {
+  background-color: transparent;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  backdrop-filter: blur(15px);
+  border-top: 1px solid var(--accent-purple);
+  z-index: 5;
+}
+
+footer p {
+  margin: 0 0 10px;
+  font-size: 0.9em;
+  color: var(--text-muted);
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+  border-top: 1px solid var(--text-muted);
+  padding-top: 10px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-links a {
+  color: var(--accent-purple);
+  text-decoration: none;
+  font-size: 1.1em;
+}
+
+.social-links a:hover {
+  color: var(--accent-purple-hover);
+  transform: scale(1.2);
+}
+
+/* BACK TO TOP */
+#back-to-top {
+  background: var(--accent-purple);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  box-shadow: var(--glow-shadow);
+}
+
+  /* Fix spacing bawah avatar */
+#avatarContainer {
+  margin-bottom: 180px !important;
+}
+
+/* Biar tombol tidak mepet dan lebih rapi */
+#avatarContainer button {
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+main {
+  padding-bottom: 200px !important;
+}
+
+#avatarContainer {
+  margin-bottom: 120px !important;
+}
+
+.footer-spacer {
+  height: 220px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 18px;
   }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .menu.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  #background-text {
+    font-size: 5em;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+
 }
