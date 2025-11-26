@@ -1,0 +1,121 @@
+:root {
+  --bg-dark: #121212;          /* Latar belakang utama */
+  --card-dark: #1e1e1e;        /* Warna kontainer/avatar */
+  --accent-purple: #a259ff;    /* Ungu terang khas Arcium */
+  --accent-purple-hover: #8e44ff;
+  --text-light: #f0f0f0;       /* Teks utama */
+  --text-muted: #aaaaaa;       /* Teks sekunder */
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  text-align: center;
+  padding: 40px 20px;
+  margin: 0;
+}
+
+h1 {
+  font-size: 2em;
+  color: var(--accent-purple);
+  margin-bottom: 10px;
+}
+
+p {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 12px;
+  width: 90%;
+  max-width: 320px;
+  font-size: 16px;
+  border: 1px solid var(--accent-purple);
+  border-radius: 6px;
+  background-color: var(--card-dark);
+  color: var(--text-light);
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: var(--accent-purple);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 10px 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--accent-purple-hover);
+}
+
+#avatarContainer {
+  margin-top: 30px;
+  display: grid;
+  place-items: center;
+}
+
+/* Flip Card Reveal */
+.card {
+  perspective: 1000px;
+  width: 240px;
+  margin: 20px auto;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden;
+  border: 2px solid var(--accent-purple);
+  border-radius: 12px;
+  background-color: var(--card-dark);
+  padding: 20px;
+  text-align: center;
+}
+
+.card-front {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-purple);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Glow effect saat card terbuka */
+.card-inner.is-flipped .card-back {
+  box-shadow: 0 0 20px var(--accent-purple), 0 0 40px var(--accent-purple-hover);
+  animation: glow 1.5s ease-out;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px var(--accent-purple); }
+  50% { box-shadow: 0 0 25px var(--accent-purple-hover); }
+  100% { box-shadow: 0 0 15px var(--accent-purple); }
+}
+
+/* Responsive mobile */
+@media (max-width: 600px) {
+  input, button {
+    width: 100%;
+    max-width: none;
+  }
+}
