@@ -5,24 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Encrypted Avatar Generator</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-  <script src="script.js" type="module"></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
   <div id="page-wrapper">
     <!-- Navbar -->
     <nav class="navbar">
-  <div class="navbar-inner">
-    <div class="menu">
-      <a href="#home" class="active">Home</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#about">About</a>
-      <button id="mode-toggle">🌙</button>
-    </div>
-
-    <div class="hamburger">☰</div>
-  </div>
-</nav>
+      <div class="navbar-inner">
+        <div class="logo">&lt;ENCRYPTED&gt;</div>
+        <div class="menu">
+          <a href="#home" class="active">Home</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#game">Game</a>
+          <a href="#about">About</a>
+          <span id="mode-toggle">🌙</span>
+        </div>
+        <div class="hamburger">☰</div>
+      </div>
+    </nav>
 
     <!-- Background Text & Particles -->
     <div id="background-text">&lt;ENCRYPTED&gt;</div>
@@ -32,7 +34,7 @@
     <main>
       <section id="home">
         <h1>🔐 Encrypted Avatar Generator</h1>
-        <p>Masukkan Discord username + discriminator (contoh: xxcode#1234):</p>
+        <p>Enter Discord username + discriminator:</p>
         <input type="text" id="discordInput" placeholder="DiscordUsername#1234">
         <div id="error-message" class="error"></div>
         <button onclick="generateAvatar()">Generate Avatar</button>
@@ -40,17 +42,93 @@
         <div class="footer-spacer"></div>
       </section>
 
+      <section id="gallery" class="hidden">
+        <h2>Gallery</h2>
+        <div class="gallery-grid" id="galleryContainer"></div>
+        <button onclick="clearGallery()">Clear Gallery</button>
+        <div class="footer-spacer"></div>
+      </section>
+
+      <section id="game" class="hidden">
+        <h2>ENCRYPTED - Catch the ARCIUM</h2>
+        <div class="game-container" id="gameContainer">
+          <div class="game-header">
+              <div class="game-info">
+                  <div>Score: <span id="score">0</span> | Level: <span id="level">1</span></div>
+                  <div style="font-size: 16px; margin-top: 5px; color: #ffd700;">⏰ Time: <span id="timer">60</span> seconds</div>
+              </div>
+              <div class="controls">
+                  <div>← → to move</div>
+                  <div>SPACE to pause</div>
+              </div>
+          </div>
+          <div class="speed-indicator">
+              Speed: <span id="speed">1x</span>
+          </div>
+          <div class="game-area" id="gameArea">
+              <!-- Shrimp -->
+              <div class="shrimp" id="shrimp">
+                  <img src="ai/payung.png" alt="Shrimp" />
+              </div>
+              <!-- Seaweed -->
+              <div class="seaweed" style="left: 80px; height: 180px;"></div>
+              <div class="seaweed" style="left: 200px; height: 150px; animation-delay: -1s;"></div>
+              <div class="seaweed" style="left: 350px; height: 200px; animation-delay: -2s;"></div>
+              <div class="seaweed" style="left: 500px; height: 160px; animation-delay: -0.5s;"></div>
+              <div class="seaweed" style="left: 650px; height: 190px; animation-delay: -1.5s;"></div>
+              <div class="seaweed" style="left: 800px; height: 170px; animation-delay: -3s;"></div>
+          </div>
+          <div class="game-over" id="gameOver">
+              <h2>Time's Up!</h2>
+              <p>Final Score: <span id="finalScore">0</span></p>
+              <p>Highest Level: <span id="finalLevel">1</span></p>
+              <p style="font-size: 14px; color: #ffd700;">🎉 Congratulations! You survived for 1 minute!</p>
+              <button class="btn" onclick="restartGame()">🔄 Play Again</button>
+          </div>
+          <div class="pause-screen" id="pauseScreen">
+              <h2>Game Paused</h2>
+              <p>Press SPACE to continue</p>
+              <button class="btn" onclick="togglePause()">▶️ Continue</button>
+              <button class="btn" onclick="restartGame()">🔄 Restart</button>
+          </div>
+          <!-- Mobile controls -->
+          <div class="mobile-controls" id="mobileControls">
+              <button class="mobile-btn" id="btnLeft">←</button>
+              <button class="mobile-btn" id="btnPause">⏸️</button>
+              <button class="mobile-btn" id="btnRight">→</button>
+          </div>
+        </div>
+        <div class="footer-spacer"></div>
+      </section>
+
+      <section id="about" class="hidden">
+        <h2>About Arcium</h2>
+        <p>Arcium is a groundbreaking parallelized confidential computing network designed specifically for blockchains. It serves as a global supercomputer for a new era of the internet, enabling developers, applications, and entire industries to leverage trustless, verifiable, and efficient computing resources.</p>
+        <p>At its core, Arcium aims to bring true confidentiality to on-chain applications. By utilizing advanced confidential computing technologies, it ensures that sensitive data and computations remain private while still being verifiable on the blockchain. This addresses one of the major limitations of traditional blockchains, where all data is publicly visible.</p>
+        <p>Key features of Arcium include:</p>
+        <ul>
+          <li><strong>Parallelized Execution:</strong> Arcium's architecture allows for high-performance parallel processing, making it suitable for complex computations that would be inefficient on standard blockchain networks.</li>
+          <li><strong>Confidential Computing:</strong> Using secure enclaves and cryptographic techniques, Arcium protects data privacy during execution, preventing unauthorized access even from node operators.</li>
+          <li><strong>Blockchain Integration:</strong> It seamlessly integrates with existing blockchains, allowing developers to deploy confidential smart contracts and applications without compromising on security or decentralization.</li>
+          <li><strong>Verifiability:</strong> All computations are provably correct through zero-knowledge proofs or similar mechanisms, maintaining the trustless nature of blockchain technology.</li>
+          <li><strong>Scalability:</strong> By offloading intensive computations to a dedicated network, Arcium helps scale blockchain applications to handle real-world demands.</li>
+        </ul>
+        <p>Arcium is particularly valuable for industries requiring privacy, such as finance (DeFi), healthcare, AI model training, and data analytics. It enables scenarios like private DeFi trading, confidential AI inferences, and secure multi-party computations on-chain.</p>
+        <p>The network is built with a focus on developer-friendliness, providing SDKs and tools to easily incorporate confidential computing into blockchain projects. As of 2025, Arcium continues to evolve, with ongoing developments in performance optimization and expanded blockchain compatibility.</p>
+        <p>For more information, visit the official Arcium website at <a href="https://www.arcium.com/">www.arcium.com</a>.</p>
+        <div class="footer-spacer"></div>
+      </section>
     
     </main>
 
     <!-- Footer -->
     <footer>
       <div class="footer-content">
-        <p>&copy; 2025 Encrypted Avatar Generator. All rights reserved.</p>
+        <p>&copy; 2025 Encrypted by xxcode.</p>
         <div class="social-links">
-          <a href="https://twitter.com">X</a>
-          <a href="https://discord.com">Discord</a>
-          <a href="https://github.com">GitHub</a>
+          <a href="https://x.com/itsaxell_">X</a>
+          <a href="https://discord.com/xxcode">Discord</a>
+          <a href="https://github.com/xxcode2">GitHub</a>
         </div>
       </div>
       <button id="back-to-top">↑ Back to Top</button>
