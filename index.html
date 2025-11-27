@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Encrypted Avatar Generator</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
+  <!-- Hapus ini sementara kalo 404 persist, atau pastiin manifest.json ada -->
+  <!-- <link rel="manifest" href="manifest.json"> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
   <script src="script.js" defer></script>
 </head>
@@ -34,10 +35,10 @@
     <main>
       <section id="home">
         <h1>🔐 Encrypted Avatar Generator</h1>
-        <p>Enter Discord username + discriminator:</p>
+        <p>Masukkan Discord username + discriminator (contoh: xxcode#1234):</p>
         <input type="text" id="discordInput" placeholder="DiscordUsername#1234">
         <div id="error-message" class="error"></div>
-        <button onclick="generateAvatar()">Generate Avatar</button>
+        <button id="generate-btn">Generate Avatar</button>  <!-- Ubah jadi id, hapus onclick -->
         <div id="avatarContainer"></div>
         <div class="footer-spacer"></div>
       </section>
@@ -124,11 +125,11 @@
     <!-- Footer -->
     <footer>
       <div class="footer-content">
-        <p>&copy; 2025 Encrypted by xxcode.</p>
+        <p>&copy; 2025 Encrypted Avatar Generator. All rights reserved.</p>
         <div class="social-links">
-          <a href="https://x.com/itsaxell_">X</a>
-          <a href="https://discord.com/xxcode">Discord</a>
-          <a href="https://github.com/xxcode2">GitHub</a>
+          <a href="https://twitter.com">X</a>
+          <a href="https://discord.com">Discord</a>
+          <a href="https://github.com">GitHub</a>
         </div>
       </div>
       <button id="back-to-top">↑ Back to Top</button>

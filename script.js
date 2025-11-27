@@ -215,6 +215,11 @@ particlesJS('particles-js', {
   retina_detect: true
 });
 
+// Tambah event listener untuk button generate
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('generate-btn').addEventListener('click', generateAvatar);
+});
+
 // Game Logic (disesuaikan dan digabung)
 let shrimpX;
 let score;
