@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Encrypted Avatar Generator</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Hapus ini sementara kalo 404 persist, atau pastiin manifest.json ada -->
-  <!-- <link rel="manifest" href="manifest.json"> -->
+  <link rel="manifest" href="manifest.json">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
   <script src="script.js" defer></script>
 </head>
@@ -38,7 +37,7 @@
         <p>Masukkan Discord username + discriminator (contoh: xxcode#1234):</p>
         <input type="text" id="discordInput" placeholder="DiscordUsername#1234">
         <div id="error-message" class="error"></div>
-        <button id="generate-btn">Generate Avatar</button>  <!-- Ubah jadi id, hapus onclick -->
+        <button id="generate-btn">Generate Avatar</button>
         <div id="avatarContainer"></div>
         <div class="footer-spacer"></div>
       </section>
@@ -71,13 +70,15 @@
               <div class="shrimp" id="shrimp">
                   <img src="ai/payung.png" alt="Shrimp" />
               </div>
-              <!-- Seaweed -->
-              <div class="seaweed" style="left: 80px; height: 180px;"></div>
-              <div class="seaweed" style="left: 200px; height: 150px; animation-delay: -1s;"></div>
-              <div class="seaweed" style="left: 350px; height: 200px; animation-delay: -2s;"></div>
-              <div class="seaweed" style="left: 500px; height: 160px; animation-delay: -0.5s;"></div>
-              <div class="seaweed" style="left: 650px; height: 190px; animation-delay: -1.5s;"></div>
-              <div class="seaweed" style="left: 800px; height: 170px; animation-delay: -3s;"></div>
+              <!-- City buildings instead of seaweed -->
+              <div class="city-building" style="left: 50px; height: 250px; width: 80px;"></div>
+              <div class="city-building" style="left: 150px; height: 300px; width: 100px; animation-delay: -1s;"></div>
+              <div class="city-building" style="left: 300px; height: 200px; width: 70px; animation-delay: -2s;"></div>
+              <div class="city-building" style="left: 450px; height: 280px; width: 90px; animation-delay: -0.5s;"></div>
+              <div class="city-building" style="left: 600px; height: 220px; width: 80px; animation-delay: -1.5s;"></div>
+              <div class="city-building" style="left: 750px; height: 260px; width: 100px; animation-delay: -3s;"></div>
+              <!-- Fog overlay -->
+              <div class="fog-overlay"></div>
           </div>
           <div class="game-over" id="gameOver">
               <h2>Time's Up!</h2>

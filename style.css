@@ -443,25 +443,6 @@ main {
     padding: 10px;
   }
 
-  .gallery-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  }
-
-  .card {
-    max-width: 200px;
-  }
-
-  input {
-    max-width: 300px;
-  }
-
-  h1, h2 {
-    font-size: 1.5em;
-  }
-
-  p {
-    font-size: 0.9em;
-  }
 
 }
 
@@ -471,8 +452,8 @@ main {
     width: 100%;
     max-width: 900px;
     height: 700px;
-    background: linear-gradient(180deg, var(--bg-dark) 0%, var(--accent-purple) 50%, var(--purple-neon) 100%);
-    border: 5px solid var(--accent-purple-hover);
+    background: linear-gradient(180deg, #121212 0%, #a259ff 50%, #b470ff 100%);
+    border: 5px solid #8e44ff;
     border-radius: 25px;
     overflow: hidden;
     box-shadow: 0 15px 40px rgba(162, 89, 255, 0.5);
@@ -508,12 +489,12 @@ main {
 }
 
 #game .game-area {
-    position: absolute;
-    top: 80px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
 }
 
 #game .shrimp {
@@ -574,19 +555,30 @@ main {
     }
 }
 
-#game .seaweed {
-    position: absolute;
-    bottom: 0;
-    width: 25px;
-    background: linear-gradient(to top, var(--accent-purple), var(--purple-neon), var(--accent-purple-hover));
-    border-radius: 15px 15px 0 0;
-    animation: sway 4s ease-in-out infinite;
-    box-shadow: inset 2px 0 4px rgba(162, 89, 255, 0.5);
+#game .city-building {
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(to top, #121212, #a259ff);
+  border-radius: 10px 10px 0 0;
+  animation: sway 4s ease-in-out infinite;
+  box-shadow: inset 2px 0 4px rgba(162, 89, 255, 0.5), 0 0 20px rgba(162, 89, 255, 0.3);
+}
+
+#game .fog-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(162, 89, 255, 0.2), rgba(139, 68, 255, 0.5));
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 5;
 }
 
 @keyframes sway {
-    0%, 100% { transform: rotate(-8deg); }
-    50% { transform: rotate(8deg); }
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
 }
 
 #game .particle {
@@ -787,8 +779,8 @@ main {
     height: 30px;
   }
 
-  #game .seaweed {
-    width: 20px;
+  #game .city-building {
+    width: 70px;
   }
 
   #game .speed-indicator {
