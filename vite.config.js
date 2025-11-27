@@ -4,13 +4,13 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        entryFileNames: 'script.js',  // Forces script.js name
-        chunkFileNames: 'script.js',
-        assetFileNames: ({name}) => {
-          if (/\.css$/.test(name ?? '')) {
-            return 'style.css';  // Forces style.css name
+        entryFileNames: 'script.js',
+        chunkFileNames: '[name].js',   // jangan pakai nama fix
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+            return 'style.css';
           }
-          return name;  // Other assets keep original names
+          return assetInfo.name || '[name].[ext]';
         }
       }
     }
