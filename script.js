@@ -162,12 +162,26 @@ function clearGallery() {
 document.querySelectorAll('.menu a').forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
-    document.querySelectorAll('section').forEach(sec => sec.classList.add('hidden'));
-    document.querySelector(link.getAttribute('href')).classList.remove('hidden');
+
+    // sembunyikan semua section
+    document.querySelectorAll('main section').forEach(sec => sec.classList.add('hidden'));
+
+    // ambil target id
+    const targetId = link.getAttribute('href').substring(1); // buang tanda #
+    const targetSection = document.getElementById(targetId);
+
+    if (targetSection) {
+      targetSection.classList.remove('hidden');
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // update menu aktif
     document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
     link.classList.add('active');
-    if (link.getAttribute('href') === '#gallery') loadGallery();
-    if (link.getAttribute('href') === '#game') initGame();  // Inisialisasi game saat section game dibuka
+
+    // load gallery atau game
+    if (targetId === 'gallery') loadGallery();
+    if (targetId === 'game') initGame();
   });
 });
 
